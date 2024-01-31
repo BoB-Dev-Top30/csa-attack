@@ -1,4 +1,5 @@
 # csa-attack
+ 2.4GHz 기준 가장 멀리 떨어진 채널로 이동
 
 # How to use
 > sudo ./csa-attack <interface> <ap mac> [<station mac>]
