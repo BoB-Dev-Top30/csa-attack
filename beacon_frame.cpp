@@ -67,7 +67,7 @@ uint8_t find_csa_insertion_location(const struct pcap_pkthdr *header, const u_ch
 }
 
 // SSID 위치 찾기
-int find_source_mac(const uint8_t *packet, int packet_len) {
+int find_destination_mac(const uint8_t *packet, int packet_len) {
 
     radiotap_header *radio_hdr = (radiotap_header *)packet;
     int radio_len = radio_hdr->len;
@@ -76,7 +76,7 @@ int find_source_mac(const uint8_t *packet, int packet_len) {
     return offset;
 }
 
-int find_destination_mac(const uint8_t *packet, int packet_len) {
+int find_source_mac(const uint8_t *packet, int packet_len) {
 
     radiotap_header *radio_hdr = (radiotap_header *)packet;
     int radio_len = radio_hdr->len;
