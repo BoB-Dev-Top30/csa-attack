@@ -4,17 +4,6 @@
 #include <pcap.h>
 #include <chrono>
 
-#include <mutex>
-#include <condition_variable>
-
-extern std::mutex mtx;
-extern std::condition_variable cv;
-extern bool ready;
-
-
-
-
-
 ///////////////////////////// 라디오헤더 ////////////////////////
 // radio 헤더 구조체
 typedef struct {
@@ -143,11 +132,5 @@ bool Distinguish_Beacon(const uint8_t *packet);
 uint8_t find_beacon_channel(const struct pcap_pkthdr *header, const u_char *packet);
 uint8_t find_csa_insertion_location(const struct pcap_pkthdr *header, const u_char *packet);
 uint8_t* insert_broadcast_csa_tag(const uint8_t *packet, int packet_len, const uint8_t* ap_mac, uint8_t target_location, uint8_t new_channel_num);
+uint8_t* insert_unicast_csa_tag(const uint8_t *packet, int packet_len, const uint8_t* ap_mac, const uint8_t* station_mac, uint8_t target_location, uint8_t new_channel_num );
 void send_csa_packet(uint8_t * csa_packet, pcap_t *handle, int length);
-
-/*
-int find_ssid_position(const uint8_t *packet, int packet_len);
-uint8_t* find_wireless_static(const uint8_t *packet, int *ssid_length);
-uint8_t* modify_beacon_ssid(const uint8_t *packet, int packet_len, const char* new_ssid);
-void send_packet(pcap_t* handle, const uint8_t* packet, int length);
-*/

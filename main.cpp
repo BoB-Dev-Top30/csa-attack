@@ -67,7 +67,8 @@ int main(int argc, char *argv[])
   uint8_t ap_mac[6];
   uint8_t station_mac[6];
 
-  uint8_t *csa_packet = NULL;
+  uint8_t *csa_packet1 = NULL;
+  uint8_t *csa_packet2 = NULL;
   switch(chosen)
   {
     case 1:
@@ -76,15 +77,15 @@ int main(int argc, char *argv[])
     case 2:
       // 맥주소와 데이터 삽입
       convert_mac_address(argv[2], ap_mac);
-      csa_packet = insert_broadcast_csa_tag(packet, header->caplen, ap_mac, target_location, new_channel_num);
-      send_csa_packet(csa_packet, handle, header->caplen+5);
+      csa_packet1 = insert_broadcast_csa_tag(packet, header->caplen, ap_mac, target_location, new_channel_num);
+      send_csa_packet(csa_packet1, handle, header->caplen+5);
       return 0;
 
     case 3:
       convert_mac_address(argv[2], ap_mac);
       convert_mac_address(argv[3], station_mac);
-      // insert_unicast_mac(header, packet, ap_mac, station_mac);
-      // send_csa(beacon_frame, handle, argv);
+      csa_packet2 = insert_unicast_csa_tag(packet, header->caplen, ap_mac, station_mac, target_location, new_channel_num);
+      send_csa_packet(csa_packet2, handle, header->caplen+5);
       return 0;
 
     case 4:
